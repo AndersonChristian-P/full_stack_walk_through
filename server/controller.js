@@ -50,7 +50,7 @@ module.exports = {
       if (authenticated) {
         res.status(200).send({ authenticated, user_id: user[0].login_id })
       } else {
-        throw new Error(401)
+        throw new Error(401) // the reason for this is that let user will never throw an error
       }
     } catch (err) {
       res.sendStatus(401)
@@ -60,7 +60,7 @@ module.exports = {
   // const authenticated returns a boolean
   // if authenticated is false throw new Error (401) and the catch
 
-  // we separate get details because we want to have the login succeed before getting the detauils
+  // we separate get details because we want to have the login succeed before getting the details
 
   getDetails: async (req, res) => {
     const db = req.app.get("db")

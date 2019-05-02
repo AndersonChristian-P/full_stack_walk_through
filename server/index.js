@@ -1,5 +1,5 @@
 const express = require("express")
-require("dotenv").config()
+require("dotenv").config() // this should be on the 1st or 2nd line
 const app = express()
 const massive = require("massive")
 const session = require("express-session")
@@ -8,7 +8,7 @@ const ctrl = require("./controller")
 
 // -- MIDDLEWARE -- //
 
-app.use(express.json())
+app.use(express.json()) // app.use() applies the middleware to every request that comes through
 app.use(session({
   secret: SESSION_SECRET,
   resave: false, // if it is set to true | if a user leaves and comes back it resets the session
