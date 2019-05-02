@@ -17,7 +17,7 @@ module.exports = {
     let emailTaken = await db.checkEmail({ email }) // db always returns an array
     emailTaken = +emailTaken[0].count // emailTaken comes back as an array with an object | [{count: <some value>}]
     if (emailTaken !== 0) {
-      return res.sendStatus(409)
+      return res.sendStatus(409)  // return stops the process
     }
 
     const salt = bcrypt.genSaltSync(10)
@@ -55,8 +55,28 @@ module.exports = {
     } catch (err) {
       res.sendStatus(401)
     }
-  }
+  },
   // we don't destructure loginPassword off of req.body into it's own variable - bad practice
   // const authenticated returns a boolean
   // if authenticated is false throw new Error (401) and the catch
+
+  // we separate get details because we want to have the login succeed before getting the detauils
+
+  getDetails: async (req, res) => {
+    const db = req.app.get("db")
+    const { session } = req
+    const { login_id: id } = session.user
+
+    try {
+      const data = await db.getUserDetails({ id })
+      res.status(200).send(data[0])
+    } catch (err) {
+      res.sendStatus(500)
+    }
+  },
+
+  logout: (req, res) => {
+    req.session.destroy()
+    res.sendStatus(200)
+  }
 }
