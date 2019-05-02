@@ -3,6 +3,7 @@ import { Switch, Route } from "react-router-dom"
 import Home from "./Components/Home"
 import Login from "./Components/Forms/Login"
 import LoginForm from "./Components/Forms/LoginForm"
+import Details from "./Components/Details"
 
 export default (
   <Switch>
@@ -12,5 +13,6 @@ export default (
         <LoginForm />
       </Login>
     )} />
+    <Route path="/info" component={Details} />
   </Switch>
 )
