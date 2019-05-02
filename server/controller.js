@@ -56,7 +56,7 @@ module.exports = {
       res.sendStatus(401)
     }
   }
-  // we don't destructure loginPassword off of req.body into it's own variable
+  // we don't destructure loginPassword off of req.body into it's own variable - bad practice
   // const authenticated returns a boolean
   // if authenticated is false throw new Error (401) and the catch
 }
